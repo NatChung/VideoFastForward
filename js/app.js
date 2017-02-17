@@ -16,7 +16,7 @@ export default class App extends Component {
     }   
 
     static defaultProps = {
-        value: 0,
+        value: 1,
     }
 
     state = {
@@ -31,16 +31,22 @@ export default class App extends Component {
     }
     
     render() {
-
+        
+        imgUrl = 'http://127.0.0.1/'+Math.floor(this.state.value)+'.jpg'
         return (
             <View style={styles.container}>
                 <Image style={styles.preview} 
-                    source={{uri:'http://127.0.0.1/300.jpg'}} />
+                    source={{uri:imgUrl}} />
                 <Slider style={styles.slider}
                     {...this.props}
-                    minimumValue={0}
-                    maximumValue={100}
-                    onValueChange={(value) => this.setState({value: value})} />
+                    minimumValue={1}
+                    maximumValue={300}
+                    onValueChange={
+                        (value) => {
+                            this.setState({value: value})
+                            console.log("value:"+Math.floor(value))
+                        }
+                    } />
             </View>
         )
     }
@@ -59,7 +65,7 @@ const styles = StyleSheet.create({
   },
   preview: {
       backgroundColor: '#0A0000',
-      height: 200,
-      width: 300
+      height: 100,
+      width: 150
   }
 });
